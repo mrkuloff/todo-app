@@ -39,7 +39,7 @@ const inputForm = () => {
   saveButton.disabled = true;
   resetButton.disabled = true;
 
-  inputValueTask.addEventListener('change', (e)=> {
+  inputValueTask.addEventListener('mouseleave', (e)=> {
     e.preventDefault()
     if (inputValueTask.value !== '') {
       saveButton.disabled = false;
@@ -50,7 +50,7 @@ const inputForm = () => {
     }
   });
 
-  resetButton.addEventListener('click', () => {
+  resetButton.addEventListener('mouseleave', () => {
     inputValueTask.value = '';
     saveButton.disabled = true;
     resetButton.disabled = true;
@@ -73,9 +73,9 @@ const actionList = (key, list) => {
         if (item.id === element.dataset.id) {
           console.log('клик5');
           if (item.status === "В процессе") {
+            console.log('клик6');
             item.status = "Выполнено";
             checkState(key);
-            console.log('клик6');
           }
         }
       });
