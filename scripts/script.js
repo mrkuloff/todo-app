@@ -17,9 +17,9 @@ const init = () => {
   const {data, key} = checkUser();
   renderGoods(list, data);
   checkState(key);
+  actionList(key, list);
 
   inputForm();
-  actionList(key, list);
   addTaskForm(key);
 };
 

@@ -62,26 +62,24 @@ const createID = () => {
 }
 
 const actionList = (key, list) => {
+
+  const data = getStorage(key);
+
   list.addEventListener('click', e => {
-    console.log('клик1');
     if (e.target.classList.contains('btn-success')) {
-      console.log('клик2');
       const element = e.target.closest('tr');
-      console.log('клик3');
-      getStorage(key).forEach((item) => {
-        console.log('клик4');
+      data.forEach((item) => {
         if (item.id === element.dataset.id) {
-          console.log('клик5');
           if (item.status === "В процессе") {
-            console.log('клик6');
             item.status = "Выполнено";
+            setStorage(key, data);
             checkState(key);
           }
         }
       });
     } else if (e.target.classList.contains('btn-danger')){
       const element = e.target.closest('tr');
-      getStorage(key).forEach((item) => {
+      data.forEach((item) => {
         if (item.id === element.dataset.id) {
 
           element.remove();
@@ -99,10 +97,11 @@ const actionList = (key, list) => {
   list.addEventListener('dblclick', e => {
     if (e.target.classList.contains('btn-success')) {
       const element = e.target.closest('tr');
-      getStorage(key).forEach((item) => {
+      data.forEach((item) => {
         if (item.id === element.dataset.id) {
           if (item.status === "Выполнено") {
             item.status = "В процессе";
+            setStorage(key, data);
             checkState(key);
           }
         }
@@ -119,10 +118,6 @@ const checkState = (key) => {
   const tdStatus = document.querySelectorAll('.status');
   const trTasks = document.querySelectorAll('tr');
 
-  trTasks.forEach((item, index)=> {
-    console.log(index + item);
-  })
-
   allTasks.forEach((item, index) => {
     if (item.status === 'Выполнено') {
       trTasks[index+1].classList.remove('table-light');
@@ -137,7 +132,7 @@ const checkState = (key) => {
       btnSuccess[index].textContent = 'Завершить';
     }
     tdNumber[index].textContent = index+1;
-  })
+  });
 }
 
 const addTaskForm = (key) => {
